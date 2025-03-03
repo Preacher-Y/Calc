@@ -3,13 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&amp;family=Roboto&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="output.css">
-    <title>Preacher |calculator</title>
+    <link rel="icon" type="png" href="img/Logo.png" sizes="192x192">
+    <title>Calculator</title>
 </head>
-<body>
-    <div class="w-full " id="web">
-
-
-    </div>
+<body class="font-[montserrat] font-semibold">
+    <section class="m-2 h-screen bg-linear-to-r from-indigo-400 via-purple-700 to-pink-400 justify-items-center content-center">
+        <div class="w-60 h-96 bg-white grid justify-items-center">
+            <div class="text-center self-center py-[14px] bg-linear-to-b from-blue-300 to-purple-400 text-white w-full">
+                <h1 class="font-bold text-2xl">Calculator</h1>
+            </div>
+            <div class="w-full text-end text-white bg-gray-900 pt-4" id="output">
+                <div id="previous" class="px-2 py-1">h</div>
+                <div id="current" class="px-2 pt-3 py-2">h</div>
+            </div>
+            <div class="grid grid-cols-4 gap-0.5 mt-0.5">
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 col-span-2 p-4">AC</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">DEL</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">÷</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">1</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">2</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">3</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">*</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">4</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">5</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">6</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">+</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">.</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 p-4">0</button>
+                <button class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 col-span-2 p-4">=</button>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
