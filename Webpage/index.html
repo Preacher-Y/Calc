@@ -9,30 +9,32 @@
     <title>Calculator</title>
 </head>
 <body class="font-[montserrat] font-semibold">
-    <section class="min-h-screen bg-linear-to-r from-indigo-400 via-purple-700 to-pink-400 justify-items-center content-center">
-        <div class="w-60 h-96 bg-white grid justify-items-center">
-            <div class="text-center cursor-pointer pt-4 bg-linear-to-b from-blue-300 to-purple-400 text-white w-full h-full">
-                <a href="index.html" class="font-bold text-2xl">Calculator</a>
-            </div>
-            <div class="w-full break-all break-words text-end grid grid-rows-[minmax(50px,auto)] content-around text-white bg-black pt-4" id="output">
-                <div id="previous" class="px-2 text-gray-300 py-1"></div>
-                <div id="current" class="px-2 pb-1"></div>
-            </div> 
-            <div class="grid  grid-cols-4 gap-0.5 mt-0.5">
-                <button id="clear"  class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer col-span-2 p-4">AC</button>
-                <button id="del" class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">DEL</button>
-                <button data-oper class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">÷</button>
-                <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">1</button>
-                <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">2</button>
-                <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">3</button>
-                <button data-oper class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">*</button>
-                <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">4</button>
-                <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">5</button>
-                <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">6</button>
-                <button data-oper class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">+</button>
-                <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">.</button>
-                <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">0</button>
-                <button data-oper class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer col-span-2 p-4">=</button>
+    <section class="min-h-screen bg-linear-to-r from-gray-700 via-gray-200 to-gray-700 justify-items-center content-center">
+        <div class="bg-gray-400 rounded-3xl p-4">
+            <div class="w-60 h-96 bg-white grid justify-items-center">
+                <div class="text-center cursor-pointer pt-4 bg-linear-to-r from-gray-500 to-purple-300 text-white w-full h-full">
+                    <a href="index.html" class="font-bold text-2xl">Calculator</a>
+                </div>
+                <div class="w-full break-all break-words text-end grid grid-rows-[minmax(50px,auto)] content-around text-white bg-black pt-4" id="output">
+                    <div id="previous" class="px-2 text-gray-300 py-1"></div>
+                    <div id="current" class="px-2 pb-1"></div>
+                </div> 
+                <div class="grid  grid-cols-4 gap-0.5 mt-0.5">
+                    <button id="clear"  class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer col-span-2 p-4">AC</button>
+                    <button id="del" class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">DEL</button>
+                    <button data-oper class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">÷</button>
+                    <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">1</button>
+                    <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">2</button>
+                    <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">3</button>
+                    <button data-oper class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">*</button>
+                    <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">4</button>
+                    <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">5</button>
+                    <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">6</button>
+                    <button data-oper class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">+</button>
+                    <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">.</button>
+                    <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">0</button>
+                    <button id="equal" class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer col-span-2 p-4">=</button>
+                </div>
             </div>
         </div>
     </section>
@@ -47,107 +49,36 @@
             clear() {
                 this.currentValue = '';
                 this.previousValue = '';
-                this.operator = undefined;
-                this.updateDisplay();
             }
 
             delete() {
-                this.currentValue = this.currentValue.slice(0, -1);
-                this.updateDisplay();
+               
             }
 
             append(number) {
-                if (number === '.' && this.currentValue.includes('.')) return;
-                this.currentValue += number;
-                this.updateDisplay();
+                
             }
 
             chooseOperation(operator) {
-                if (this.currentValue === '') return;
-
-                if (this.previousValue !== '') {
-                    this.compute(); 
-                }
-
-                this.operator = operator;
-                this.previousValue = this.currentValue;
-                this.currentValue = '';
-                this.updateDisplay();
-            }
-
-            compute() {
-                let result;
-                const prev = parseFloat(this.previousValue);
-                const curr = parseFloat(this.currentValue);
-
-                if (isNaN(prev) || isNaN(curr)) return;
-
-                switch (this.operator) {
-                    case '+':
-                        result = prev + curr;
-                        break;
-                    case '-':
-                        result = prev - curr;
-                        break;
-                    case '*':
-                        result = prev * curr;
-                        break;
-                    case '÷':
-                        if (curr === 0) {
-                            alert("Cannot divide by zero!");
-                            return;
-                        }
-                        result = prev / curr;
-                        break;
-                    default:
-                        return;
-                }
-
-                this.currentValue = result.toString();
-                this.operator = undefined;
-                this.previousValue = '';
-                this.updateDisplay();
+                
             }
 
             updateDisplay() {
-                this.current.textContent = this.currentValue;
-                this.previous.textContent = this.previousValue + (this.operator ? ` ${this.operator}` : '');
+                this.current.innerText = this.currentValue;
             }
         }
 
-        const numButtons = document.querySelectorAll('[data-num]');
-        const operButtons = document.querySelectorAll('[data-oper]');
-        const equalButton = document.querySelector('[data-equal]');
-        const delButton = document.getElementById('del');
-        const clearButton = document.getElementById('clear');
-        const previousDisplay = document.getElementById('previous');
-        const currentDisplay = document.getElementById('current');
+        const num = document.querySelectorAll('[data-num]');
+        const oper = document.querySelectorAll('[data-oper]');
+        const equal = document.getElementById('equal');
+        const del = document.getElementById('del');
+        const clear = document.getElementById('clear');
+        const previous = document.getElementById('previous');
+        const current = document.getElementById('current');
 
-        const calc = new Calc(previousDisplay, currentDisplay);
+        const calc = new Calc(previous, current);
 
-        numButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                calc.append(button.textContent);
-            });
-        });
-
-        operButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                calc.chooseOperation(button.textContent);
-            });
-        });
-
-        equalButton.addEventListener('click', () => {
-            calc.compute();
-        });
-
-        clearButton.addEventListener('click', () => {
-            calc.clear();
-        });
-
-        delButton.addEventListener('click', () => {
-            calc.delete();
-        });
+        
 
     </script>
 </body>
