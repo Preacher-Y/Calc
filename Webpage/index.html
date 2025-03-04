@@ -11,8 +11,8 @@
 <body class="font-[montserrat] font-semibold">
     <section class="min-h-screen bg-linear-to-r from-gray-700 via-gray-200 to-gray-700 justify-items-center content-center">
         <div class="bg-gray-400 rounded-3xl p-4">
-            <div class="w-60 h-96 bg-white grid justify-items-center">
-                <div class="text-center cursor-pointer pt-4 bg-linear-to-r from-gray-500 to-purple-300 text-white w-full h-full">
+            <div class="w-60 h-96 bg-white rounded-3xl grid justify-items-center">
+                <div class="text-center cursor-pointer rounded-t-2xl pt-4 bg-linear-to-r from-gray-500 to-purple-300 text-white w-full h-full">
                     <a href="index.html" class="font-bold text-2xl">Calculator</a>
                 </div>
                 <div class="w-full break-all break-words text-end grid grid-rows-[minmax(50px,auto)] content-around text-white bg-black pt-4" id="output">
@@ -31,9 +31,9 @@
                     <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">5</button>
                     <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">6</button>
                     <button data-oper class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">+</button>
-                    <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">.</button>
+                    <button data-num class="bg-blue-300 rounded-bl-3xl hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">.</button>
                     <button data-num class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer p-4">0</button>
-                    <button id="equal" class="bg-blue-300 hover:bg-cyan-400 active:bg-purple-100 cursor-pointer col-span-2 p-4">=</button>
+                    <button id="equal" class="bg-blue-300 rounded-br-3xl hover:bg-cyan-400 active:bg-purple-100 cursor-pointer col-span-2 p-4">=</button>
                 </div>
             </div>
         </div>
@@ -49,22 +49,62 @@
             clear() {
                 this.currentValue = '';
                 this.previousValue = '';
+                this.operation = undefined;
+                this.updateDisplay();
             }
 
             delete() {
-               
+                this.currentValue = this.currentValue.toString().slice(0, -1);
+                this.updateDisplay();
             }
 
             append(number) {
-                
+                if (number === '.' && this.currentValue.includes('.')) return;
+                this.currentValue = this.currentValue.toString() + number.toString();
+                this.updateDisplay();
             }
 
             chooseOperation(operator) {
-                
+                if (this.currentValue === '') return;
+                if (this.previousValue !== '') {
+                    this.compute();
+                }
+                this.operation = operator;
+                this.previousValue = this.currentValue;
+                this.currentValue = '';
+                this.updateDisplay();
+            }
+
+            compute() {
+                let computation;
+                const prev = parseFloat(this.previousValue);
+                const curr = parseFloat(this.currentValue);
+                if (isNaN(prev) || isNaN(curr)) return;
+                switch (this.operation) {
+                    case '+':
+                        computation = prev + curr;
+                        break;
+                    case '-':
+                        computation = prev - curr;
+                        break;
+                    case '*':
+                        computation = prev * curr;
+                        break;
+                    case '÷':
+                        computation = prev / curr;
+                        break;
+                    default:
+                        return;
+                }
+                this.currentValue = computation;
+                this.operation = undefined;
+                this.previousValue = '';
+                this.updateDisplay();
             }
 
             updateDisplay() {
-                this.current.innerText = this.currentValue;
+                this.current.textContent = this.currentValue;
+                this.previous.textContent = this.previousValue + (this.operation ? ` ${this.operation}` : '');
             }
         }
 
@@ -77,6 +117,30 @@
         const current = document.getElementById('current');
 
         const calc = new Calc(previous, current);
+
+        num.forEach(el => {
+            el.addEventListener('click', () => {
+                calc.append(el.textContent);
+            });
+        });
+
+        oper.forEach(el => {
+            el.addEventListener('click', () => {
+                calc.chooseOperation(el.textContent);
+            });
+        });
+
+        equal.addEventListener('click', () => {
+            calc.compute();
+        });
+
+        del.addEventListener('click', () => {
+            calc.delete();
+        });
+
+        clear.addEventListener('click', () => {
+            calc.clear();
+        });
 
         
 
